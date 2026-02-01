@@ -1,0 +1,11 @@
+services:
+  oci-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: terraform-oci-container
+    volumes:
+      - .oci/private_key.pem:/root/.oci/private_key.pem:ro
+      - .oci/config:/root/.oci/config:ro
+    stdin_open: true
+    tty: true

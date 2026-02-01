@@ -11,12 +11,20 @@ RUN apk add --no-cache curl unzip && \
     rm terraform_${TF_VERSION}_linux_amd64.zip && \
     apk del curl unzip
 
-# --- Test Stage ---
-# This step runs during 'docker build'. If it fails, the build stops.
-RUN terraform --version
 
+
+# --- Final Stage ---
 FROM alpine:3.23
+
+RUN apk add --no-cache oci-cli
+
 COPY --from=builder /usr/local/bin/terraform /usr/local/bin/terraform
+
+# Verification Test
+RUN terraform --version && oci --version
 
 WORKDIR /workspace
 ENTRYPOINT ["terraform"]
+
+
+
