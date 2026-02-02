@@ -23,8 +23,8 @@ COPY --from=builder /usr/local/bin/terraform /usr/local/bin/terraform
 # Verification Test
 RUN terraform --version && oci --version
 
-WORKDIR /workspace
-ENTRYPOINT ["terraform"]
+ENV TF_PLUGIN_CACHE_DIR=/plugin-cache
+
 
 
 

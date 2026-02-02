@@ -1,11 +1,22 @@
 services:
-  oci-cli:
-    build:
+  terraform:
+    build: 
       context: .
       dockerfile: Dockerfile
-    container_name: terraform-oci-container
+    container_name: terraform-oci
+    working_dir: /workspace 
     volumes:
-      - .oci/private_key.pem:/root/.oci/private_key.pem:ro
-      - .oci/config:/root/.oci/config:ro
-    stdin_open: true
-    tty: true
+      - ./terraform:/workspace:Z
+      - .oci/private_key.pem:/root/.oci/private_key.pem:ro,Z
+      - .oci/config:/root/.oci/config:ro,Z
+      - tf-cache:/plugin-cache:Z
+    env_file:
+      - .env
+    environment:
+      - TF_PLUGIN_CACHE=/plugin-cache
+    entrypoint: ["terraform"]
+    command: ["--version"]
+
+volumes:
+  tf-cache:
+    driver: local
