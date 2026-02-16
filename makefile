@@ -6,6 +6,9 @@ TF = docker compose run --rm terraform
 init:
 	$(TF) init
 
+initup:
+	$(TF) init -upgrade
+
 validate:
 	$(TF) validate
 
@@ -14,3 +17,6 @@ plan:
 
 apply:
 	$(TF) apply
+
+version:
+	$(TF) version
