@@ -27,6 +27,12 @@ variable "network_compartment_description" {
   type        = string
 }
 
+variable "instance_compartment_name" {
+  description = "VMs compartment"
+  type        = string
+  default     = "INSTANCES"
+}
+
 
 ############################################
 # VCN
@@ -80,7 +86,7 @@ variable "vm_display_name" {
 
 variable "vm_shape" {
   type    = string
-  default = "VM.Standard.A1.Flex"  # Always Free ARM shape
+  default = "VM.Standard.E2.1.Micro"  # Always Free ARM shape
 }
 
 variable "vm_ocpus" {
@@ -95,7 +101,7 @@ variable "vm_memory_in_gbs" {
 
 variable "vm_image_id" {
   type    = string
-  default = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaayy7g3zqj6zvd3cl4x6xyq7t3wj4c5df3x4c3z3q4q4q4q4q4q4q"  # Alpine Linux 3.18
+  default = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaayy7g3zqj6zvd3cl4x6xyq7t3wj4c5df3x4c3z3q4q4q4q4q4q4q"
 }
 
 variable "vm_ssh_public_key" {

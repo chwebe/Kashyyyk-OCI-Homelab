@@ -10,3 +10,8 @@ resource "oci_identity_compartment" "network_compartment" {
   name           = "${var.network_compartment_name}"
 }
 
+resource "oci_identity_compartment" "instance_compartment" {
+  compartment_id = oci_identity_compartment.prod_compartment.id
+  description    = "VMs compartment"
+  name           = var.instance_compartment_name
+}
