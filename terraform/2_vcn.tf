@@ -53,11 +53,25 @@ resource "oci_core_security_list" "sl_prod_vcn_1" {
   }
 
   egress_security_rules {
-    protocol    = "6"
+    protocol    = "all"
     destination = "0.0.0.0/0"
-    tcp_options {
-      min = 443
-      max = 443
+  }
+  
+  # Allow ICMP (Ping)
+  ingress_security_rules {
+    protocol = "1"
+    source   = "0.0.0.0/0"
+    icmp_options {
+      type = 3
+      code = 4
+    }
+  }
+
+  ingress_security_rules {
+    protocol = "1"
+    source   = "0.0.0.0/0"
+    icmp_options {
+      type = 8
     }
   }
 }

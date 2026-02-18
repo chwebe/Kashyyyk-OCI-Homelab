@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+# Terraform Remote Backend Configuration (S3 Compatible)
+# ------------------------------------------------------------------------------
+# To use this:
+# 1. Create an Object Storage Bucket in OCI (e.g., "terraform-states")
+# 2. Rename this file to "backend.tf"
+# 3. Fill in the details below
+# 4. Run `terraform init` to migrate your local state to the cloud
+# ------------------------------------------------------------------------------
+
+terraform {
+  backend "s3" {
+    bucket   = "terraform-states"                    # Name of your OCI bucket
+    key      = "homelab/terraform.tfstate"           # Path within the bucket
+    region   = "eu-amsterdam-1"                      # Your OCI region
+    
+    # OCI Object Storage S3 Compatibility Endpoint
+    # Format: https://<namespace>.compat.objectstorage.<region>.oraclecloud.com
+    # You can find your namespace by running `oci os ns get` or in the Console (Tenancy details)
+    endpoint = "https://<namespace>.compat.objectstorage.eu-amsterdam-1.oraclecloud.com"
+
+    # Authentication (Best practice: use environment variables instead of hardcoding)
+    # export AWS_ACCESS_KEY_ID="<Your Customer Secret Key Access Key>"
+    # export AWS_SECRET_ACCESS_KEY="<Your Customer Secret Key>"
+    
+    # Required settings for OCI S3 Compatibility
+    skip_region_validation      = true
+    skip_credentials_validation = true
+    skip_metadata_api_check     = true
+    force_path_style            = true
+  }
+}

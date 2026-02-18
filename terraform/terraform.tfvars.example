@@ -1,0 +1,20 @@
+############################################
+# Compartments
+############################################
+# Your Tenancy OCID (Sensitive)
+root_compartment_id = "ocid1.tenancy.oc1..aaaaaaaaxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+prod_compartment_description = "Production Compartment"
+prod_compartment_name = "PRODUCTION"
+
+network_compartment_description = "Network Compartment"
+network_compartment_name = "NETWORKS"
+
+############################################
+# VM Instance (Always Free Tier)
+############################################
+vm_display_name = "wireguard-vm"
+vm_ocpus = 1
+vm_memory_in_gbs = 1
+# Replace with your actual SSH public key
+vm_ssh_public_key = "ssh-rsa AAAA..."
